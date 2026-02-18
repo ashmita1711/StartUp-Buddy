@@ -64,17 +64,23 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
   res.status(500).json({ error: 'Something went wrong!' });
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
-  console.log(`📚 API Documentation:`);
-  console.log(`   Health: GET /api/health`);
-  console.log(`   Auth: POST /api/auth/register, /api/auth/login`);
-  console.log(`   Dashboard: GET /api/dashboard/metrics`);
-  console.log(`   Mentor: POST /api/mentor/chat`);
-  console.log(`   Financial: POST /api/financial/runway`);
-  console.log(`   Risk: POST /api/risk/assess`);
-  console.log(`   Competitor: POST /api/competitor/analyze`);
-  console.log(`   Co-Founder: POST /api/cofounder/match`);
-  console.log(`   Analytics: GET /api/analytics/overview`);
-  console.log(`   Startups: GET /api/startups`);
-});
+// Only start server if not in Vercel environment
+if (process.env.VERCEL !== '1') {
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on http://localhost:${PORT}`);
+    console.log(`📚 API Documentation:`);
+    console.log(`   Health: GET /api/health`);
+    console.log(`   Auth: POST /api/auth/register, /api/auth/login`);
+    console.log(`   Dashboard: GET /api/dashboard/metrics`);
+    console.log(`   Mentor: POST /api/mentor/chat`);
+    console.log(`   Financial: POST /api/financial/runway`);
+    console.log(`   Risk: POST /api/risk/assess`);
+    console.log(`   Competitor: POST /api/competitor/analyze`);
+    console.log(`   Co-Founder: POST /api/cofounder/match`);
+    console.log(`   Analytics: GET /api/analytics/overview`);
+    console.log(`   Startups: GET /api/startups`);
+  });
+}
+
+// Export for Vercel
+export default app;
